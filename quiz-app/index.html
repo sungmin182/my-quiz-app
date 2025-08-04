@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Permissions-Policy" content="unload=*, beforeunload=*" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="app-container">
+      <!-- 1번 화면: 학년/플레이어 수 선택 -->
+      <div id="setup-scene" class="scene">
+        <fieldset>
+          <legend>학년 선택</legend>
+          <label for="grade-low">
+            <input
+              type="radio"
+              id="grade-low"
+              name="gradeLevel"
+              value="low"
+              checked
+            />
+            저학년
+          </label>
+          <label for="grade-high">
+            <input
+              type="radio"
+              id="grade-high"
+              name="gradeLevel"
+              value="high"
+            />
+            고학년
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>플레이어 수 선택</legend>
+          <label for="players-2">
+            <input
+              type="radio"
+              id="players-2"
+              name="playerCount"
+              value="2"
+              checked
+            />
+            2인
+          </label>
+          <label for="players-3">
+            <input type="radio" id="players-3" name="playerCount" value="3" />
+            3인
+          </label>
+          <label for="players-4">
+            <input type="radio" id="players-4" name="playerCount" value="4" />
+            4인
+          </label>
+        </fieldset>
+        <button id="to-topic-btn">다음</button>
+      </div>
+      <!-- 2번 화면: 주제 선택 -->
+      <div id="topic-scene" class="scene hidden">
+        <div
+          id="topic-header"
+          style="
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <span id="selected-grade"></span>
+          <div id="player-info-group">
+            <div id="player-icons"></div>
+          </div>
+        </div>
+        <div
+          id="player-names"
+          style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem"
+        ></div>
+        <div id="scoreboard" style="width: 100%; margin-bottom: 1.5rem"></div>
+        <div class="topic-buttons">
+          <button id="btn-environment" class="topic-btn blue">환경</button>
+          <button id="btn-literacy" class="topic-btn green">문해력</button>
+          <button id="btn-digital" class="topic-btn red">
+            디지털 리터러시
+          </button>
+        </div>
+        <button id="back-to-setup-btn" class="back-bar-btn" title="처음으로">
+          처음으로 돌아가기
+        </button>
+      </div>
+      <!-- 3번 화면: 문제/정답/결과 -->
+      <div id="question-scene" class="scene hidden">
+        <p id="question-text"></p>
+        <div id="answer-options"></div>
+        <button id="submit-answer-btn">정답 제출</button>
+      </div>
+      <div id="result-scene" class="scene hidden">
+        <h2 id="result-feedback"></h2>
+        <button id="return-to-topic-btn">다른 문제 풀기</button>
+      </div>
+    </div>
+  </body>
+</html>
