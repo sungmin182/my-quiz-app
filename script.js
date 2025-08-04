@@ -36,6 +36,60 @@ function generateQuestionId(question) {
   )}`;
 }
 
+// 플레이어 아이콘(이모지) 생성 함수
+function renderPlayerIcons() {
+  playerIconsElement.innerHTML = "";
+  for (let i = 1; i <= gameState.playerCount; i++) {
+    // 플레이어 블록(아이콘+이름)
+    const block = document.createElement("div");
+    block.className =
+      "player-block" + (i === gameState.currentPlayer ? " current" : "");
+
+    // 아이콘
+    const icon = document.createElement("span");
+    icon.textContent = "👤";
+    icon.style.fontSize = "3.2rem";
+    // 강조 효과는 .current에서 CSS로 처리
+
+    // 이름 라벨
+    const name = document.createElement("div");
+    name.className =
+      "player-name-label " +
+      playerColorClasses[(i - 1) % playerColorClasses.length];
+    name.textContent = `플레이어${i}`;
+
+    // 조합
+    block.appendChild(icon);
+    block.appendChild(name);
+    playerIconsElement.appendChild(block);
+  }
+}
+
+// 점수판 렌더링 함수
+function renderScoreboard() {
+  scoreboardElement.innerHTML = "";
+  for (let i = 1; i <= gameState.playerCount; i++) {
+    const scoreDiv = document.createElement("div");
+    scoreDiv.style.display = "inline-block";
+    scoreDiv.style.marginRight = "1.2rem";
+    scoreDiv.style.fontWeight = i === gameState.currentPlayer ? "700" : "400";
+    scoreDiv.style.color = i === gameState.currentPlayer ? "#6366f1" : "#222";
+    scoreDiv.textContent = `플레이어${i}: ${
+      gameState.scores[`player${i}`] ?? 0
+    }점`;
+    scoreboardElement.appendChild(scoreDiv);
+  }
+}
+
+// 학년 표시 렌더링 함수
+function renderSelectedGrade() {
+  if (gameState.gradeLevel === "low") {
+    selectedGradeElement.innerHTML = `<span class='grade-label low'><span class='emoji'>🧒</span>저학년</span>`;
+  } else {
+    selectedGradeElement.innerHTML = `<span class='grade-label high'><span class='emoji'>🎓</span>고학년</span>`;
+  }
+}
+
 // 2번 화면(주제 선택) 렌더링 함수
 function renderTopicSceneInfo() {
   renderSelectedGrade();
